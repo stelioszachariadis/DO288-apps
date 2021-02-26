@@ -11,12 +11,13 @@ RUN   yum install -y --disableplugin=subscription-manager java-1.8.0-openjdk-hea
       yum clean all --disableplugin=subscription-manager -y && \
       mkdir -p /opt/app-root/bin
 
+
 # Copy the runnable fat JAR to the container.
 ADD   https://github.com/RedHatTraining/DO288-apps/releases/download/OCP-4.1-1/hello-java.jar /opt/app-root/bin/
 
 COPY  run-app.sh /opt/app-root/bin/
 
-RUN   chmod -R 0 /opt/app-root && \
+RUN   chgrp -R 0 /opt/app-root && \
       chmod -R 700 /opt/app-root
 
 EXPOSE 8080
